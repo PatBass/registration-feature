@@ -55,5 +55,9 @@
             "allow-contrib": false,
             "require": "4.2.*"
         }
+    },
+    "require-dev": {
+        "symfony/form": "4.2.*",
+        "symfony/test-pack": "^1.0"
     }
 }
