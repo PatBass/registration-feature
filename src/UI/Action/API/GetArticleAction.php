@@ -54,7 +54,7 @@ class GetArticleAction
         //return new JsonResponse($this->articleRepository->findAll());
         //return new JsonResponse("Hello from Get articles");
         $responder = $this->responder;
-        $data = "Hello from Get Article";
+        $data = $this->articleRepository->findAll();
         return $responder($this->serializer->serialize($data, 'json'));
     }
 }
