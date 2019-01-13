@@ -5,15 +5,27 @@ namespace App\Domain\Models;
 
 
 use App\Domain\Interfaces\MediaInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * Class Media
  *
- * @package App\Domain\Models
  * @author Patrick Bassoukissa
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ * @ORM\Table(name="registration_media")
  */
 class Media implements MediaInterface
 {
+    /**
+     * @var UuidInterface
+     * @ORM\Id()
+     * @ORM\Column(type="uuid")
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -29,20 +41,21 @@ class Media implements MediaInterface
      */
     private $publicUrl;
 
-
     /**
      * Media constructor.
-     *
+     * @param UuidInterface $id
      * @param string $type
      * @param string $name
      * @param string $publicUrl
      */
-    public function __construct(string $type, string $name, string $publicUrl)
+    public function __construct(UuidInterface $id, string $type, string $name, string $publicUrl)
     {
+        $this->id = Uuid::uuid4();
         $this->type = $type;
         $this->name = $name;
         $this->publicUrl = $publicUrl;
     }
+
 
     /**
      * {@inheritdoc}
