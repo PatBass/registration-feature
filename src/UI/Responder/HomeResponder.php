@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: patrick
- * Date: 12/01/19
- * Time: 23:50
- */
+
 
 namespace App\UI\Responder;
 
@@ -32,8 +27,13 @@ class HomeResponder implements HomeResponderInterface
 
     public function __invoke()
     {
-        return new Response(
+        $response = new Response(
             $this->twig->render('home/index.html.twig')
         );
+
+        $response->headers->set('Content-Type', 'application/json');
+        $response->setCharset('ISO-8859-1');
+
+        return $response;
     }
 }

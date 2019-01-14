@@ -4,6 +4,7 @@
 namespace App\Domain\Models;
 
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,22 +28,24 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="guid", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $uuid;
+    private $title;
 
     /**
      * Article constructor.
-     * @param $id
+     *
+     * @param UuidInterface $id
      * @param $content
-     * @param $uuid
+     * @param $title
      */
-    public function __construct($id, $content, $uuid)
+    public function __construct(UuidInterface $id, $content, $title)
     {
         $this->id = Uuid::uuid4();
         $this->content = $content;
-        $this->uuid = $uuid;
+        $this->title = $title;
     }
+
 
     /**
      * @return UuidInterface
@@ -53,15 +56,12 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUuid()
+    public function getTitle()
     {
-        return $this->uuid;
+        return $this->title;
     }
-
-
-
 
     /**
      * @return string
